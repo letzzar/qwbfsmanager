@@ -92,11 +92,13 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v5
       - uses: actions/download-artifact@v5
         with:
           path: dist
           merge-multiple: true
       - uses: softprops/action-gh-release@v2
         with:
+          name: QWBFS Manager ${{ github.ref_name }}
+          body_path: packages/release-notes/${{ github.ref_name }}.md
           files: dist/*
-          generate_release_notes: true

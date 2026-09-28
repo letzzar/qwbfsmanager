@@ -1,7 +1,7 @@
 set(APP_NAME "QWBFS Manager")
 set(APP_ORGANIZATION "QWBFS Team")
 set(APP_DOMAIN "github.com/letzzar/qwbfsmanager")
-set(APP_COPYRIGHTS "© 2010 - 2016 Filipe Azevedo")
+set(APP_COPYRIGHTS "© 2010 - 2016 Filipe Azevedo, © 2026 letzzar")
 set(APP_DOWNLOADS_FEED "https://github.com/letzzar/qwbfsmanager/releases.atom")
 set(APP_REPORT_BUG_URL "https://github.com/letzzar/qwbfsmanager/issues")
 set(APP_DISCUSS_URL "http://groups.google.com/group/qwbfs-discuss")

@@ -13,6 +13,14 @@ This fork ports the original [pasnox/qwbfsmanager](https://github.com/pasnox/qwb
 
 [Downloads](https://github.com/letzzar/qwbfsmanager/releases) - [Report an issue](https://github.com/letzzar/qwbfsmanager/issues)
 
+# Credits & License
+  * Original QWBFS Manager: © 2010-2016 Filipe Azevedo ([pasnox](https://github.com/pasnox)) - https://github.com/pasnox/qwbfsmanager
+  * Qt 6 port (1.3.0): © 2026 [letzzar](https://github.com/letzzar) and Claude (Anthropic)
+  * Icons: [Lucide](https://lucide.dev) (ISC, see `qwbfs/resources/icons/LICENSE-lucide`)
+  * Bundled libraries: libwbfs (kwiirk, GPL v2), PictureFlow (Ariya Hidayat, MIT), subset of [Fresh](https://github.com/pasnox/fresh) (Filipe Azevedo, LGPL v3, see `3rdparty/fresh/LICENSE`)
+
+QWBFS Manager is free software, distributed under the terms of the GNU General Public License version 2 or later (see `GPL-2`).
+
 # Features
   * Build with Qt4 and/or Qt5 (1.2.5)
   * Partitions combobox widget presenting their name, file system and size for a better and easy access to your drives. (1.2.0)
