@@ -496,12 +496,15 @@ void WorkerThread::isoToISO( WorkerThread::Task task, QWBFS::Model::Disc& source
         return;
     }
     
-    const uint bufferSize = 1024 *1024 *5; // 5 MB buffer size
-    char buffer[ bufferSize ];
-    int totalRead = 0;
+    const qint64 bufferSize = 1024 *1024 *5; // 5 MB buffer size
+    QByteArray bufferData( bufferSize, Qt::Uninitialized ); // on the heap: too big for a thread stack
+    char* buffer = bufferData.data();
+    qint64 totalRead = 0;
+    // progress is reported in KiB so disc images bigger than 2 GiB fit in an int
+    const int totalKiB = int( in.size() /1024 );
     
-    QTime estimatedTime = QWBFS::Driver::estimatedTimeForTask( totalRead, in.size() );
-    emit currentProgressChanged( totalRead, in.size(), estimatedTime );
+    QTime estimatedTime = QWBFS::Driver::estimatedTimeForTask( 0, totalKiB );
+    emit currentProgressChanged( 0, totalKiB, estimatedTime );
     
     while ( !in.atEnd() ) {
         const qint64 read = in.read( buffer, bufferSize );
@@ -528,8 +531,8 @@ void WorkerThread::isoToISO( WorkerThread::Task task, QWBFS::Model::Disc& source
         
         totalRead += read;
         
-        estimatedTime = QWBFS::Driver::estimatedTimeForTask( totalRead, in.size() );
-        emit currentProgressChanged( totalRead, in.size(), estimatedTime );
+        estimatedTime = QWBFS::Driver::estimatedTimeForTask( int( totalRead /1024 ), totalKiB );
+        emit currentProgressChanged( int( totalRead /1024 ), totalKiB, estimatedTime );
     }
     
     in.close();

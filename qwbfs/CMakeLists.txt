@@ -50,6 +50,9 @@ set(QWBFS_SOURCES
     src/ofi-labs-pictureflow/pictureflow-qt/pictureflow.cpp
     src/CoverFlowView.cpp
     src/PartitionComboBox.cpp
+    # Theme aware monochrome SVG icons (*.tsvg), built in as a static icon engine plugin
+    src/themedsvgicon/ThemedSvgIconEngine.cpp
+    src/themedsvgicon/ThemedSvgIconPlugin.cpp
     src/UIMain.ui
     src/PartitionWidget.ui
     src/ProgressDialog.ui
@@ -67,17 +70,9 @@ else()
     list(APPEND QWBFS_SOURCES src/models/pPartitionModel_linux.cpp)
 endif()
 
-# Theme aware monochrome SVG icons (*.tsvg), see src/themedsvgicon
-qt_add_plugin(themedsvgicon STATIC
-    CLASS_NAME ThemedSvgIconPlugin
-    PLUGIN_TYPE iconengines
-    src/themedsvgicon/ThemedSvgIconEngine.cpp
-    src/themedsvgicon/ThemedSvgIconPlugin.cpp
-)
-target_link_libraries(themedsvgicon PRIVATE Qt6::Gui Qt6::Svg)
-set_target_properties(themedsvgicon PROPERTIES AUTOMOC_MOC_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}/src/themedsvgicon")
-
 qt_add_executable(qwbfsmanager WIN32 MACOSX_BUNDLE ${QWBFS_SOURCES})
+
+set_source_files_properties(src/themedsvgicon/ThemedSvgIconPlugin.cpp PROPERTIES COMPILE_DEFINITIONS QT_STATICPLUGIN)
 
 if(APPLE)
     set_target_properties(qwbfsmanager PROPERTIES OUTPUT_NAME "QWBFSManager")
@@ -116,12 +111,12 @@ target_compile_definitions(qwbfsmanager PRIVATE
 target_link_libraries(qwbfsmanager PRIVATE
     wbfs
     fresh
-    themedsvgicon
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
     Qt6::Network
     Qt6::Xml
+    Qt6::Svg
 )
 
 if(APPLE)

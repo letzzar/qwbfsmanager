@@ -545,12 +545,12 @@ bool Driver::isWBFSPartitionOrFile( const QString& _fileName )
             
             if ( DeviceIoControl( handle, IOCTL_DISK_GET_DRIVE_GEOMETRY, NULL, 0, &diskGeometry, sizeof(DISK_GEOMETRY), &bytes, NULL ) ) {
                 const DWORD sectorSize = diskGeometry.BytesPerSector;
-                char buffer[ sectorSize  ];
+                QByteArray buffer( sectorSize, 0 );
                 DWORD read;
                 
-                if ( ReadFile( handle, buffer, sectorSize, &read, NULL ) ) {
+                if ( ReadFile( handle, buffer.data(), sectorSize, &read, NULL ) ) {
                     CloseHandle( handle );
-                    return QByteArray( buffer ).left( 4 ).toLower() == "wbfs";
+                    return buffer.left( 4 ).toLower() == "wbfs";
                 }
             }
         }
