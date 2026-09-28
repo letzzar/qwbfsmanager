@@ -1,8 +1,17 @@
 # Project Description
-QWBFS Manager provides a cross platform Qt 4 GUI for working with hard disk drives that have been formatted to the WBFS file system.
-This is a cross platform 32/64bits (Windows, OS X, Linux/Unix like) alternative to [WBFS Manager](http://wbfsmanager.codeplex.com/).
+QWBFS Manager provides a cross platform Qt GUI for working with hard disk drives that have been formatted to the WBFS file system.
+This is a cross platform (Windows, macOS, Linux) alternative to WBFS Manager.
 
-[Downloads](https://github.com/pasnox/qwbfsmanager/releases) - [Forum](http://groups.google.com/group/qwbfs-discuss) - [Downloads Feed](http://to-be-changed)
+This fork ports the original [pasnox/qwbfsmanager](https://github.com/pasnox/qwbfsmanager) to modern systems:
+
+  * Qt 6 and CMake (the old qmake/Qt 4 build is gone), no more OpenSSL or git submodule dependency.
+  * Native **Apple Silicon** build; the released DMG is universal (arm64 + x86_64, macOS 12+).
+  * Modern Linux (udev properties and mounted volumes instead of the defunct UDisks 1 D-Bus service).
+  * Windows builds with MSVC.
+  * Refreshed interface: theme aware line icons (light/dark mode), new application icon and splash screen.
+  * Update checker using this fork's [GitHub releases](https://github.com/letzzar/qwbfsmanager/releases).
+
+[Downloads](https://github.com/letzzar/qwbfsmanager/releases) - [Report an issue](https://github.com/letzzar/qwbfsmanager/issues)
 
 # Features
   * Build with Qt4 and/or Qt5 (1.2.5)
@@ -49,11 +58,27 @@ This is a cross platform 32/64bits (Windows, OS X, Linux/Unix like) alternative 
   * Indirect transfer can lead to WBFS convertion to ISO of 4.4GB in a temporary file in you system path.
 
 # Requirements
-  * Qt 4.5.0 minimum (bundled with mac os x & windows packages)
-  * OpenSSL (bundled with mac os x & windows packages)
-  * A brain
-  * A chair
-  * Some fingers
+  * Qt >= 6.2 (Core, Gui, Widgets, Network, Xml, Svg, LinguistTools) - bundled with the macOS & Windows packages
+  * CMake >= 3.21 and a C/C++17 compiler
+  * Linux only: libudev (`libudev-dev`)
+
+# Building
+```sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release   # add -DCMAKE_PREFIX_PATH=<qt6 prefix> if needed
+cmake --build build
+```
+
+  * **macOS**: `brew install qt cmake ninja`, then `packages/macos/make-dmg.sh` builds a self contained, signed (ad-hoc) `QWBFSManager.app` and a `.dmg` in `dist/`.
+    Use `ARCHS="arm64;x86_64"` with a universal Qt (e.g. from the Qt online installer) for a universal binary.
+  * **Linux**: `sudo cmake --install build` installs the binary, the translations, the desktop file and the icon.
+    Ubuntu/Debian packages: `qt6-base-dev qt6-tools-dev qt6-l10n-tools qt6-svg-dev libudev-dev`.
+  * **Windows**: build with MSVC, then `windeployqt qwbfsmanager.exe`.
+
+GitHub Actions builds the three platforms on every push, and publishes a release when a `v*` tag is pushed.
+
+# Raw disk access
+Reading/writing a WBFS partition needs raw access to the device (`/dev/diskXsY` on macOS, `/dev/sdXN` on Linux, `\\.\X:` on Windows).
+Depending on your system you may need to run QWBFS Manager as administrator/root, or give your user access to the device.
 
 # Instructions
   * Install using setup.
