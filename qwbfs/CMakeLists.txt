@@ -9,7 +9,7 @@ set(APP_DISCUSS_URL "http://groups.google.com/group/qwbfs-discuss")
 find_package(Git QUIET)
 if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     execute_process(
-        COMMAND ${GIT_EXECUTABLE} describe --always --dirty
+        COMMAND ${GIT_EXECUTABLE} describe --tags --always --dirty
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         OUTPUT_VARIABLE APP_GIT_REVISION
         OUTPUT_STRIP_TRAILING_WHITESPACE
