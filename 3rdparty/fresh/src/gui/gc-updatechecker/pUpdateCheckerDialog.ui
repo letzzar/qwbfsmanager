@@ -28,9 +28,6 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="pixmap">
-        <pixmap resource="../../../resources/fresh.qrc">:/fresh/icons/gc-update-checker.png</pixmap>
-       </property>
       </widget>
      </item>
      <item row="1" column="1">

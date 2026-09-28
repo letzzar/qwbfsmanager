@@ -101,9 +101,9 @@ public:
         : QSplashScreen( pixmap )
     {
         QFont font = this->font();
-        font.setPixelSize( 9 );
+        font.setPixelSize( 10 );
         setFont( font );
-        showMessage( tr( "Version %1" ).arg( APPLICATION_VERSION_STR ), Qt::AlignRight | Qt::AlignBottom, QColor( 0, 0, 0 ) );
+        showMessage( tr( "Version %1" ).arg( APPLICATION_VERSION_STR ), Qt::AlignRight | Qt::AlignBottom, QColor( 74, 91, 120 ) );
 
         show();
         raise();
@@ -180,7 +180,9 @@ int main( int argc, char** argv )
 
     QObject::connect( &app, SIGNAL( lastWindowClosed() ), &app, SLOT( quit() ) );
 
-    SplashScreen splash( pIconManager::pixmap( "splashscreen.png", ":/icons" ) );
+    QPixmap splashPixmap( ":/icons/splashscreen.png" );
+    splashPixmap.setDevicePixelRatio( 2.0 ); // rendered at 2x for high dpi screens
+    SplashScreen splash( splashPixmap );
     UIMain w;
 
     splash.handle( &w );

@@ -33,6 +33,7 @@
 #include <QPushButton>
 #include <QRegularExpression>
 #include <QLocale>
+#include <QIcon>
 #include <QDesktopServices>
 #include <QDebug>
 
@@ -182,6 +183,7 @@ pUpdateCheckerDialog::pUpdateCheckerDialog( pUpdateChecker* updateChecker, QWidg
     mUpdateChecker = updateChecker;
 
     ui->setupUi( this );
+    ui->lLogo->setPixmap( QIcon( QSL( ":/icons/cloud-download.tsvg" ) ).pixmap( QSize( 48, 48 ), devicePixelRatioF() ) );
     setAttribute( Qt::WA_DeleteOnClose );
     setAttribute( Qt::WA_MacSmallSize );
     ui->dbbButtons->button( QDialogButtonBox::Yes )->setEnabled( false );

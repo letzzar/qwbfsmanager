@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E4EFFD"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.38" r="0.5">
+      <stop offset="0" stop-color="#4FB2FF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#4FB2FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <circle cx="400" cy="230" r="215" fill="none" stroke="#1D5FD6" stroke-opacity="0.07" stroke-width="2"/>
+  <circle cx="400" cy="230" r="265" fill="none" stroke="#1D5FD6" stroke-opacity="0.05" stroke-width="2"/>
+  <image x="250" y="80" width="300" height="300" xlink:href="ICON_HREF"/>
+  <text x="400" y="445" text-anchor="middle" font-family="Helvetica Neue, Segoe UI, Arial, sans-serif" font-size="60" font-weight="bold" fill="#10223F">QWBFS Manager</text>
+  <text x="400" y="495" text-anchor="middle" font-family="Helvetica Neue, Segoe UI, Arial, sans-serif" font-size="24" fill="#4A5B78">Wii Backup File System manager</text>
+</svg>

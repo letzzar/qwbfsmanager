@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4FB2FF"/>
+      <stop offset="1" stop-color="#1D5FD6"/>
+    </linearGradient>
+    <linearGradient id="disc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.55" stop-color="#E8F1FF"/>
+      <stop offset="1" stop-color="#C9DCF7"/>
+    </linearGradient>
+    <linearGradient id="drive" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#DCE6F2"/>
+    </linearGradient>
+  </defs>
+  <!-- macOS style squircle (824x824 content box inside the 1024 canvas) -->
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#bg)"/>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="4"/>
+  <!-- disc -->
+  <g transform="translate(512 440)">
+    <circle r="255" fill="#0B3D91" fill-opacity="0.25" transform="translate(0 14)"/>
+    <circle r="255" fill="url(#disc)"/>
+    <circle r="205" fill="none" stroke="#1D5FD6" stroke-opacity="0.10" stroke-width="3"/>
+    <circle r="160" fill="none" stroke="#1D5FD6" stroke-opacity="0.10" stroke-width="3"/>
+    <path d="M -180 -120 A 216 216 0 0 1 -60 -205" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" stroke-opacity="0.9"/>
+    <circle r="92" fill="#2F7BEA"/>
+    <circle r="40" fill="url(#bg)"/>
+    <circle r="40" fill="#1D5FD6"/>
+  </g>
+  <!-- hard drive -->
+  <g transform="translate(512 725)">
+    <rect x="-250" y="-72" width="500" height="150" rx="40" fill="#0B3D91" fill-opacity="0.25" transform="translate(0 10)"/>
+    <rect x="-250" y="-72" width="500" height="150" rx="40" fill="url(#drive)"/>
+    <rect x="-200" y="-12" width="230" height="30" rx="15" fill="#1D5FD6" fill-opacity="0.22"/>
+    <circle cx="150" cy="3" r="20" fill="#34C759"/>
+    <circle cx="205" cy="3" r="20" fill="#1D5FD6" fill-opacity="0.35"/>
+  </g>
+</svg>

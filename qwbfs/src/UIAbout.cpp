@@ -44,6 +44,10 @@ UIAbout::UIAbout( QWidget* parent )
 {
     setAttribute( Qt::WA_DeleteOnClose );
     setupUi( this );
+
+    QPixmap splash( ":/icons/splashscreen.png" );
+    splash.setDevicePixelRatio( 2.0 ); // rendered at 2x for high dpi screens
+    lSplash->setPixmap( splash );
 #if !defined( Q_OS_MAC )
     const QList<QWidget*> widgets = QList<QWidget*>()
         << lName

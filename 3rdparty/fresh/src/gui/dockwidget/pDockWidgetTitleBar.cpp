@@ -204,19 +204,19 @@ void pDockWidgetTitleBar::paintEvent( QPaintEvent* event )
 
 void pDockWidgetTitleBar::updateStyleChange()
 {
-    setIconSize( QSize( 13, 13 ) );
+    setIconSize( QSize( 14, 14 ) );
     layout()->setSpacing( 0 );
     layout()->setContentsMargins( 2, 2, 2, 2 );
     
     QIcon icon;
     
-    icon = style()->standardIcon( QStyle::SP_TitleBarShadeButton, 0, widgetForAction( aOrientation ) );
+    icon = QIcon( QSL( ":/icons/rotate-cw-square.tsvg" ) );
     aOrientation->setIcon( icon );
     
-    icon = style()->standardIcon( QStyle::SP_TitleBarNormalButton, 0, widgetForAction( aFloat ) );
+    icon = QIcon( QSL( ":/icons/picture-in-picture-2.tsvg" ) );
     aFloat->setIcon( icon );
     
-    icon = style()->standardIcon( QStyle::SP_TitleBarCloseButton, 0, widgetForAction( aClose ) );
+    icon = QIcon( QSL( ":/icons/x.tsvg" ) );
     aClose->setIcon( icon );
     
     if ( orientation() == Qt::Horizontal ) {

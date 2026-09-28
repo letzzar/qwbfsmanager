@@ -9,7 +9,6 @@ set(FRESH_SOURCES
     src/core/pVersion.cpp
     src/gui/pGuiUtils.cpp
     src/gui/pIconManager.cpp
-    src/gui/pPaypalButton.cpp
     src/gui/pToolButton.cpp
     src/gui/pTranslationDialog.cpp
     src/gui/pTranslationDialog.ui

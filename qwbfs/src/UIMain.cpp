@@ -47,7 +47,6 @@
 #include <FreshCore/pTranslationManager>
 #include <FreshGui/pTranslationDialog>
 #include <FreshGui/pUpdateChecker>
-#include <FreshGui/pPaypalButton>
 #include "models/pPartitionModel.h" // will be part of fresh library in a next version
 
 #include <QMenuBar>
@@ -100,12 +99,6 @@ UIMain::UIMain( QWidget* parent )
     dwTools->toggleViewAction()->setIcon( QIcon( ":/icons/panel-left.tsvg" ) );
     dwCovers->toggleViewAction()->setIcon( QIcon( ":/icons/image.tsvg" ) );
 
-    mDonationWidget = new pPaypalButton( this );
-    mDonationWidget->setBusinessId( "5R924WYXJ6BAW" );
-    mDonationWidget->setItemName( "QWBFS Manager" );
-    mDonationWidget->setItemId( "QWBFS-DONATION" );
-    mDonationWidget->setCurrencyCode( "EUR" );
-
     mActions = new QMenu( this );
     mActions->setIcon( aConvertToWBFSFiles->icon() );
     mActions->addAction( aConvertToWBFSFiles );
@@ -117,10 +110,6 @@ UIMain::UIMain( QWidget* parent )
     toolBar->addSeparator();
     toolBar->addAction( dwTools->toggleViewAction() );
     toolBar->addAction( dwCovers->toggleViewAction() );
-    QWidget* spacerWidget = new QWidget( toolBar );
-    spacerWidget->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Maximum ) );
-    toolBar->addWidget( spacerWidget );
-    toolBar->addWidget( mDonationWidget );
 
     mFoldersModel = new QFileSystemModel( this );
     mFoldersModel->setFilter( QDir::Dirs | QDir::NoDotAndDotDot );

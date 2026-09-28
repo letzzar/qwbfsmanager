@@ -42,7 +42,6 @@ class QMenuBar;
 class QFileSystemModel;
 class QNetworkReply;
 class pNetworkAccessManager;
-class pPaypalButton;
 class pUpdateChecker;
 
 namespace QWBFS {
@@ -69,7 +68,6 @@ protected:
     QMenuBar* mMenuBar;
 #endif
     QMenu* mActions;
-    pPaypalButton* mDonationWidget;
     QFileSystemModel* mFoldersModel;
     QFileSystemModel* mFilesModel;
     pNetworkAccessManager* mCache;
