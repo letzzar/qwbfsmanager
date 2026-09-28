@@ -219,12 +219,12 @@ void PartitionWidget::views_selectionChanged()
     const QWBFS::Model::DiscModel* model = qobject_cast<const QWBFS::Model::DiscModel*>( sm->model() );
     const QModelIndexList indexes = sm->selectedIndexes();
 
-    emit coverRequested( indexes.isEmpty() ? QString::null : model->discId( indexes.last() ) );
+    emit coverRequested( indexes.isEmpty() ? QString() : model->discId( indexes.last() ) );
 }
 
 void PartitionWidget::coverFlow_centerIndexChanged( const QModelIndex& index )
 {
-    emit coverRequested( index.isValid() ? lvDiscs->model()->discId( index ) : QString::null );
+    emit coverRequested( index.isValid() ? lvDiscs->model()->discId( index ) : QString() );
 }
 
 void PartitionWidget::progress_jobFinished( const QWBFS::Model::Disc& disc )
@@ -281,7 +281,7 @@ void PartitionWidget::on_tbFormat_clicked()
     const QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
     const QMessageBox::StandardButton button = QMessageBox::No;
 
-    if ( QMessageBox::question( this, QString::null, text, buttons, button ) == button ) {
+    if ( QMessageBox::question( this, QString(), text, buttons, button ) == button ) {
         return;
     }
 
@@ -311,7 +311,7 @@ void PartitionWidget::on_tbRemoveDiscs_clicked()
     const QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
     const QMessageBox::StandardButton button = QMessageBox::No;
 
-    if ( indexes.isEmpty() || QMessageBox::question( this, QString::null, text, buttons, button ) == button ) {
+    if ( indexes.isEmpty() || QMessageBox::question( this, QString(), text, buttons, button ) == button ) {
         return;
     }
 
@@ -343,7 +343,7 @@ void PartitionWidget::on_tbRenameDisc_clicked()
         return;
     }
 
-    const QString name = QInputDialog::getText( this, QString::null, tr( "Choose a new name for the disc" ), QLineEdit::Normal, disc.title );
+    const QString name = QInputDialog::getText( this, QString(), tr( "Choose a new name for the disc" ), QLineEdit::Normal, disc.title );
 
     if ( name.isNull() ) {
         return;

@@ -1,0 +1,102 @@
+name: Build
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  QT_VERSION: "6.8.3"
+
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools libudev-dev libgl-dev
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+      - name: Build
+        run: cmake --build build
+      - name: Package
+        run: |
+          DESTDIR="$PWD/stage" cmake --install build
+          mkdir -p dist
+          tar -C stage -czf dist/QWBFSManager-linux-x86_64.tar.gz .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QWBFSManager-linux
+          path: dist/*
+
+  windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          arch: win64_msvc2022_64
+          cache: true
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${{ github.workspace }}/stage"
+      - name: Build
+        run: cmake --build build
+      - name: Package
+        shell: pwsh
+        run: |
+          cmake --install build
+          windeployqt --release --no-compiler-runtime --no-opengl-sw --no-system-d3d-compiler stage/qwbfsmanager.exe
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Compress-Archive -Path stage/* -DestinationPath dist/QWBFSManager-windows-x64.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QWBFSManager-windows
+          path: dist/*
+
+  macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          cache: true
+      - name: Install Ninja
+        run: brew install ninja || true
+      - name: Build universal (Apple Silicon + Intel) DMG
+        env:
+          ARCHS: "arm64;x86_64"
+          MACOS_MIN: "12.0"
+        run: QT_DIR="$QT_ROOT_DIR" packages/macos/make-dmg.sh build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QWBFSManager-macos
+          path: dist/*.dmg
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [linux, windows, macos]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          generate_release_notes: true

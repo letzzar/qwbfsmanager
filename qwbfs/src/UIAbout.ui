@@ -659,7 +659,7 @@ library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.
 </string>
          </property>
-         <property name="tabStopWidth">
+         <property name="tabStopDistance">
           <number>40</number>
          </property>
          <property name="textInteractionFlags">

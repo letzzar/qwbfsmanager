@@ -105,7 +105,7 @@ QString WorkerThread::taskToLabel( WorkerThread::Task task, bool indirect )
             return tr( "Rename Disc" );
     }
     
-    return QString::null;
+    return QString();
 }
 
 void WorkerThread::stop()

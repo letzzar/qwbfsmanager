@@ -54,7 +54,7 @@ struct Disc
     
     bool isValid() const;
     bool hasError() const;
-    QString baseName( const QString& invalidChars = QString::null ) const;
+    QString baseName( const QString& invalidChars = QString() ) const;
     
     void addToDocument( QDomDocument& document ) const;
     void readFromElement( const QDomElement& element );
@@ -76,9 +76,9 @@ struct Disc
     int error;
 };
 
-inline uint qHash( const Disc& disc )
+inline size_t qHash( const Disc& disc, size_t seed = 0 )
 {
-    return qHash( QString( "%1 - %2" ).arg( disc.id ).arg( disc.origin ) );
+    return qHash( QString( "%1 - %2" ).arg( disc.id ).arg( disc.origin ), seed );
 }
 
 }; // Model

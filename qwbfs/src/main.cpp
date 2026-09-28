@@ -152,7 +152,7 @@ public:
 int main( int argc, char** argv )
 {
     Application app( argc, argv );
-#if defined( Q_OS_MACX )
+#if defined( Q_OS_MACOS )
     app.setStyle( new IconSizeProxyStyle );
 #endif
     app.setApplicationName( APPLICATION_NAME );
@@ -160,7 +160,6 @@ int main( int argc, char** argv )
     app.setOrganizationDomain( APPLICATION_DOMAIN );
     app.setWindowIcon( QIcon( ":/icons/qwbfsmanager.png" ) );
 
-    qsrand( QDateTime( QDate( 0, 0, 0 ) ).secsTo( QDateTime::currentDateTime() ) );
     QPixmapCache::setCacheLimit( QPixmapCache::cacheLimit() *4 );
     pNetworkAccessManager::instance()->setCacheDirectory( QDir::tempPath().append( QString( "/%1-%2-%3" ).arg( APPLICATION_NAME ).arg( APPLICATION_VERSION ).arg( QT_VERSION_STR ) ) );
 

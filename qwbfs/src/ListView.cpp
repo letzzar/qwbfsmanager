@@ -247,12 +247,13 @@ QItemViewPaintPairs ListView::draggablePaintPairs( const QModelIndexList& indexe
     return ret;
 }
 
-QStyleOptionViewItemV4 ListView::viewOptionsV4() const
+QStyleOptionViewItem ListView::viewOptionsV4() const
 {
-    QStyleOptionViewItemV4 option = viewOptions();
+    QStyleOptionViewItem option;
+    initViewItemOption( &option );
     
     if ( wordWrap() ) {
-        option.features = QStyleOptionViewItemV2::WrapText;
+        option.features = QStyleOptionViewItem::WrapText;
     }
     
     option.locale = locale();
@@ -275,14 +276,14 @@ QPixmap ListView::renderToPixmap( const QModelIndexList& indexes, QRect* r ) con
     pixmap.fill( Qt::transparent );
     
     QPainter painter( &pixmap );
-    QStyleOptionViewItemV4 option = viewOptionsV4();
+    QStyleOptionViewItem option = viewOptionsV4();
     option.state |= QStyle::State_Selected;
     
     for ( int j = 0; j < paintPairs.count(); ++j ) {
         option.rect = paintPairs.at( j ).first.translated( -r->topLeft() );
         const QModelIndex& current = paintPairs.at( j ).second;
         
-        itemDelegate( current )->paint( &painter, option, current );
+        itemDelegateForIndex( current )->paint( &painter, option, current );
     }
     
     return pixmap;

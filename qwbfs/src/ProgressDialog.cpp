@@ -37,7 +37,7 @@
 
 #include <QPushButton>
 #include <QTimer>
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QDebug>
 
 ProgressDialog::ProgressDialog( QWidget* parent )
@@ -199,20 +199,20 @@ void ProgressDialog::updateSpace()
     QWidget* widget = parentWidget();
     QRect rect = geometry();
     
-    if ( !widget ) {
-        widget = QApplication::desktop();
-    }
-    
-    widget = widget->window();
-    
     if ( !cbDetails->isChecked() ) {
         rect.setHeight( minimumSizeHint().height() );
     }
     
-    rect.moveCenter( widget->mapToGlobal( widget->rect().center() ) );
+    if ( widget ) {
+        widget = widget->window();
+        rect.moveCenter( widget->mapToGlobal( widget->rect().center() ) );
 #if defined( Q_OS_MAC )
-    rect.moveTop( widget->mapToGlobal( widget->rect().topLeft() ).y() );
+        rect.moveTop( widget->mapToGlobal( widget->rect().topLeft() ).y() );
 #endif
+    }
+    else {
+        rect.moveCenter( screen()->availableGeometry().center() );
+    }
     resize( rect.size() );
     move( rect.topLeft() );
 }

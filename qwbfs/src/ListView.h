@@ -93,7 +93,7 @@ protected:
     
     QItemViewPaintPairs draggablePaintPairs( const QModelIndexList& indexes, QRect* r ) const;
     QPixmap renderToPixmap( const QModelIndexList& indexes, QRect* r ) const;
-    QStyleOptionViewItemV4 viewOptionsV4() const;
+    QStyleOptionViewItem viewOptionsV4() const;
     void clearOrRemove();
 };
 

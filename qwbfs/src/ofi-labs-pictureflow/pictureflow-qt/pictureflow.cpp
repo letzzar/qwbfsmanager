@@ -680,7 +680,7 @@ QRect PictureFlowSoftwareRenderer::renderSlide(const SlideInfo &slide, int col1,
     PFreal ys = slide.cy - state->slideWidth * sdy / 2;
     PFreal dist = distance * PFREAL_ONE;
 
-    int xi = qMax((PFreal)0, (w * PFREAL_ONE / 2) + fdiv(xs * h, dist + ys) >> PFREAL_SHIFT);
+    int xi = qMax((PFreal)0, ((w * PFREAL_ONE / 2) + fdiv(xs * h, dist + ys)) >> PFREAL_SHIFT);
     if (xi >= w)
         return rect;
 
@@ -1038,15 +1038,15 @@ void PictureFlow::mousePressEvent(QMouseEvent* event)
     const int midWidth = width() /2;
     const int midSlideWidth = slideSize().width() /2;
     
-    if (event->x() > (midWidth + midSlideWidth))
+    if (event->position().x() > (midWidth + midSlideWidth))
         showNext();
-    else if (event->x() < (midWidth - midSlideWidth))
+    else if (event->position().x() < (midWidth - midSlideWidth))
         showPrevious();
 }
 
 void PictureFlow::wheelEvent(QWheelEvent* event)
 {
-    const int numDegrees = event->delta() / 8;
+    const int numDegrees = event->angleDelta().y() / 8;
     const int numSteps = numDegrees / 15;
     
     if ( numSteps < 0 ) {

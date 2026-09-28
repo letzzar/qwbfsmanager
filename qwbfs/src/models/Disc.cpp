@@ -90,7 +90,7 @@ bool Disc::hasError() const
 
 QString Disc::baseName( const QString& invalidChars ) const
 {
-    return isValid() ? QString( "%1 [%2]" ).arg( cleanupGameTitle( title, invalidChars ) ).arg( id ) : QString::null;
+    return isValid() ? QString( "%1 [%2]" ).arg( cleanupGameTitle( title, invalidChars ) ).arg( id ) : QString();
 }
 
 void Disc::addToDocument( QDomDocument& document ) const
@@ -108,10 +108,10 @@ void Disc::addToDocument( QDomDocument& document ) const
 
 void Disc::readFromElement( const QDomElement& element )
 {
-    id = element.attribute( "id", QString::null );
-    title = element.attribute( "title", QString::null );
+    id = element.attribute( "id", QString() );
+    title = element.attribute( "title", QString() );
     size = element.attribute( "size", QString::number( 0 ) ).toUInt();
-    origin = element.attribute( "origin", QString::null );
+    origin = element.attribute( "origin", QString() );
     region = element.attribute( "region", 0 ).toInt();
     state = element.attribute( "state", QString::number( QWBFS::Driver::None ) ).toInt();
     error = element.attribute( "error", QString::number( QWBFS::Driver::Ok ) ).toInt();

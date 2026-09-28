@@ -80,7 +80,7 @@ QVariant pPartitionModel::data( const QModelIndex& index, int role ) const
                 case pPartition::FreeSize:
                     return pCoreUtils::fileSizeToString( partition.property( pPartition::Property( index.column() ) ).toLongLong() );
                 case pPartition::LastCheck:
-                    return partition.property( pPartition::LastCheck ).toDateTime().toString( Qt::SystemLocaleShortDate );
+                    return partition.property( pPartition::LastCheck ).toDateTime().toString( QLocale::system().dateTimeFormat( QLocale::ShortFormat ) );
             }
             
             break;
@@ -149,7 +149,7 @@ QVariant pPartitionModel::headerData( int section, Qt::Orientation orientation, 
 
 bool pPartitionModel::insertRow( int row, const QModelIndex& parent )
 {
-    const pPartition partition( QString::null );
+    const pPartition partition{ QString() };
     const int index = mPartitions.indexOf( partition );
     
     if ( index == -1 && !parent.isValid() ) {

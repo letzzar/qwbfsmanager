@@ -33,9 +33,7 @@
 #include <QStringList>
 #include <QFileInfo>
 #include <QSocketNotifier>
-#include <QDBusConnection>
-#include <QDBusMessage>
-#include <QDBusVariant>
+#include <QStorageInfo>
 #include <QDebug>
 
 class DisksSession : public QObject
@@ -65,7 +63,7 @@ public:
         
         mNotifier = new QSocketNotifier( udev_monitor_get_fd( mMonitor ), QSocketNotifier::Read, this );
         
-        connect( mNotifier, SIGNAL( activated( int ) ), this, SLOT( deviceEventReceived() ) );
+        connect( mNotifier, &QSocketNotifier::activated, this, &DisksSession::deviceEventReceived );
 
         start();
     }
@@ -90,21 +88,33 @@ public:
             properties[ name ] = value;
         }
         
+        // Old udev rules (UDisks 1) exported UDISKS_PARTITION_TYPE, modern ones export ID_PART_ENTRY_TYPE ("0x25" on MBR disks)
+        if ( !properties.contains( "UDISKS_PARTITION_TYPE" ) && properties.contains( "ID_PART_ENTRY_TYPE" ) ) {
+            properties[ "UDISKS_PARTITION_TYPE" ] = properties[ "ID_PART_ENTRY_TYPE" ];
+        }
+        
         if ( properties.contains( "UDISKS_PARTITION_TYPE" ) ) {
             properties[ "UDISKS_PARTITION_TYPE" ] = properties[ "UDISKS_PARTITION_TYPE" ].toString().toLongLong( 0, 16 );
         }
         
-        const QString devName = QFileInfo( properties[ "DEVNAME" ].toString() ).fileName();
-        QDBusMessage question = QDBusMessage::createMethodCall( "org.freedesktop.UDisks", QString( "/org/freedesktop/UDisks/devices/%1" ).arg( devName ), "org.freedesktop.DBus.Properties", "Get" );
-        question << "org.freedesktop.UDisks.Device" << "DeviceMountPaths";
-        QDBusMessage answer = QDBusConnection::systemBus().call( question, QDBus::Block, 1 );
+        // Same for the partition size, fallback to the sysfs size attribute (always in 512 bytes sectors)
+        if ( !properties.contains( "UDISKS_PARTITION_SIZE" ) ) {
+            const char* sectors = udev_device_get_sysattr_value( device, "size" );
+            
+            if ( sectors ) {
+                properties[ "UDISKS_PARTITION_SIZE" ] = QString::fromLocal8Bit( sectors ).toLongLong() *512;
+            }
+        }
+        
+        // UDisks 1 D-Bus service does not exist anymore, look at the mounted volumes instead
+        const QString devicePath = QFileInfo( properties[ "DEVNAME" ].toString() ).canonicalFilePath();
         QStringList mountPoints;
         
-        foreach ( const QVariant& variant, answer.arguments() ) {
-            const QStringList values = variant.value<QDBusVariant>().variant().toStringList();
+        foreach ( const QStorageInfo& storage, QStorageInfo::mountedVolumes() ) {
+            const QString storageDevice = QFileInfo( QString::fromLocal8Bit( storage.device() ) ).canonicalFilePath();
             
-            if ( !values.isEmpty() ) {
-                mountPoints << values;
+            if ( !devicePath.isEmpty() && storageDevice == devicePath ) {
+                mountPoints << storage.rootPath();
             }
         }
         

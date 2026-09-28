@@ -4,10 +4,13 @@
 
 #include "tools.h"
 
+#ifdef WBFS_WITH_OPENSSL
+// Only needed by the (currently unused) Wii crypto helpers below.
 #include <stddef.h>	// to accommodate certain broken versions of openssl
 #include <openssl/md5.h>
 #include <openssl/aes.h>
 #include <openssl/sha.h>
+#endif
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
@@ -60,6 +63,7 @@ void wbe64(u8 *p, u64 x)
 	wbe32(p + 4, (u32)(x));
 }
 
+#ifdef WBFS_WITH_OPENSSL
 //
 // crypto
 //
@@ -327,6 +331,8 @@ int check_cert_chain(u8 *data, u32 data_len, u8 *cert, u32 cert_len)
 			return -5;
 	}
 }
+
+#endif // WBFS_WITH_OPENSSL
 
 //
 // compression

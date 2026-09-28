@@ -69,7 +69,7 @@ public:
     /*!
         Create a partition for device at \a devicePath. The device validity is checked according to \a checkValidity beefore setting the internal property.
     */
-    pPartition( const QString& devicePath = QString::null, bool checkValidity = true );
+    pPartition( const QString& devicePath = QString(), bool checkValidity = true );
     /*!
         Check if \a other is same partition as this. The test is only done against the device path.
     */

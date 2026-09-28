@@ -1,1 +1,5 @@
 *.pro.user*
+/build*/
+/dist/
+.DS_Store
+.cache/

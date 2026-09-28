@@ -48,7 +48,7 @@ namespace Internal {
 class DiscHandleData : public QSharedData
 {
 public:
-    DiscHandleData( const QWBFS::Partition::Handle& handle = QWBFS::Partition::Handle(), const QString& discId = QString::null );
+    DiscHandleData( const QWBFS::Partition::Handle& handle = QWBFS::Partition::Handle(), const QString& discId = QString() );
     DiscHandleData( const DiscHandleData& other );
     ~DiscHandleData();
     

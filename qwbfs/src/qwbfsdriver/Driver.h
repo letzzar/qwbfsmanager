@@ -159,7 +159,7 @@ public:
         \param newName a new name to use for the added disc. /!\ windows only.
         \return PartitionNotOpened, DiscReadFailed, DiscAlreadyInPartition, DiscAddFailed or Ok
     */
-    int addDiscImage( const QString& fileName, progress_callback_t progressCallback = Driver::progress_callback, partition_selector_t partitionSelection = ONLY_GAME_PARTITION, bool copy1to1 = false, const QString& newName = QString::null ) const;
+    int addDiscImage( const QString& fileName, progress_callback_t progressCallback = Driver::progress_callback, partition_selector_t partitionSelection = ONLY_GAME_PARTITION, bool copy1to1 = false, const QString& newName = QString() ) const;
     /*!
         \details remove a disc from the partition.
         \param discId the disc id to remove.
@@ -174,7 +174,7 @@ public:
         \param name the name of the iso if not null, else the name is based on the disc title.
         \return PartitionNotOpened, DiscNotFound, DiscExtractFailed, DiscWriteFailed or Ok.
     */
-    int extractDisc( const QString& discId, const QString& path, const QString& name = QString::null, progress_callback_t progressCallback = Driver::progress_callback ) const;
+    int extractDisc( const QString& discId, const QString& path, const QString& name = QString(), progress_callback_t progressCallback = Driver::progress_callback ) const;
     /*!
         \details rename the disc id to another name.
         \param discId the disc id to rename.
@@ -245,7 +245,7 @@ public:
         \param wbfsFilePath the target wbfs file path if setted, else isoFilePath +".wbfs"
         \return DiscReadFailed, addDiscImage result or Ok
     */
-    static int convertIsoFileToWBFSFile( const QString& isoFilePath, const QString& wbfsFilePath = QString::null );
+    static int convertIsoFileToWBFSFile( const QString& isoFilePath, const QString& wbfsFilePath = QString() );
     /*!
         \details return a string representation of the error.
         \param error the error to represent.

@@ -390,11 +390,11 @@ void DiscModel::sort( int column, Qt::SortOrder order )
     
     if ( order == Qt::AscendingOrder ) {
         HashLessThanSorter lesser( column );
-        qSort( newDiscs.begin(), newDiscs.end(), lesser );
+        std::sort( newDiscs.begin(), newDiscs.end(), lesser );
     }
     else {
         HashGreaterThanSorter greater( column );
-        qSort( newDiscs.begin(), newDiscs.end(), greater );
+        std::sort( newDiscs.begin(), newDiscs.end(), greater );
     }
     
     for ( int i = 0; i < newDiscs.count(); i++ ) {
@@ -426,7 +426,8 @@ bool DiscModel::dropMimeData( const QMimeData* data, Qt::DropAction action, int 
     QSet<QWBFS::Model::Disc> discs;
     
     if ( data->formats().contains( WBFS_DISCS_FORMAT ) ) {
-        discs = QWBFS::Model::Disc::fromByteArray( data->data( WBFS_DISCS_FORMAT ) ).toSet();
+        const QWBFS::Model::DiscList list = QWBFS::Model::Disc::fromByteArray( data->data( WBFS_DISCS_FORMAT ) );
+        discs = QSet<QWBFS::Model::Disc>( list.cbegin(), list.cend() );
     }
     else if ( data->formats().contains( URLS_FORMAT ) ) {
         foreach ( const QUrl& url, data->urls() ) {
@@ -466,7 +467,7 @@ bool DiscModel::dropMimeData( const QMimeData* data, Qt::DropAction action, int 
         return false;
     }
     
-    addDiscs( discs.toList() );
+    addDiscs( QWBFS::Model::DiscList( discs.cbegin(), discs.cend() ) );
     return true;
 }
 
@@ -508,7 +509,7 @@ QPixmap DiscModel::statePixmap( int state, const QSize& size ) const
     const QString key = QString( "%1-%2-%3" ).arg( url ).arg( size.width() ).arg( size.height() );
     QPixmap pixmap;
     
-    if ( !QPixmapCache::find( key, pixmap ) ) {
+    if ( !QPixmapCache::find( key, &pixmap ) ) {
         if ( pixmap.load( url ) ) {
             pixmap = pixmap.scaled( size, Qt::KeepAspectRatio, Qt::SmoothTransformation );
             QPixmapCache::insert( key, pixmap );
@@ -621,7 +622,7 @@ void DiscModel::removeSelection( const QItemSelection& _selection )
     
     // reverse order to remove last items first
     SelectionRangePairGreaterThanSorter sorter;
-    qSort( selection.begin(), selection.end(), sorter );
+    std::sort( selection.begin(), selection.end(), sorter );
     
     // remove items
     foreach ( const DiscModel::PairIntInt& pair, selection ) {

@@ -721,7 +721,7 @@ QString Driver::errorToString( QWBFS::Driver::Error error )
             return tr( "Unknown error" );
     }
     
-    return QString::null;
+    return QString();
 }
 
 QString Driver::regionToString( int region )
@@ -746,7 +746,7 @@ QString Driver::stateToString( QWBFS::Driver::State state )
             return tr( "Failed" );
     }
     
-    return QString::null;
+    return QString();
 }
 
 void Driver::setForceMode( bool force )
@@ -880,7 +880,7 @@ QWBFS::Model::Disc Driver::isoDiscInfo( const QString& filePath )
 Driver::FileType Driver::fileType( const QString& filePath )
 {
     const QFileInfo file( filePath );
-    const QString suffix = file.isDir() ? QString::null : file.suffix().toLower();
+    const QString suffix = file.isDir() ? QString() : file.suffix().toLower();
     
     if ( suffix == "iso" ) {
         return QWBFS::Driver::ISOFile;

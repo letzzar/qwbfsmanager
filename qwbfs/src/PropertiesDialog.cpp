@@ -55,15 +55,15 @@ PropertiesDialog::PropertiesDialog( QWidget* parent )
     lProxyWarning->setFont( font );
 #endif
     
-    cbViewMode->addItem( QString::null, QListView::ListMode );
-    cbViewMode->addItem( QString::null, QListView::IconMode );
+    cbViewMode->addItem( QString(), QListView::ListMode );
+    cbViewMode->addItem( QString(), QListView::IconMode );
     
-    cbViewIconType->addItem( QString::null, QWBFS::WiiTDB::CoverDisc );
-    cbViewIconType->addItem( QString::null, QWBFS::WiiTDB::Cover );
+    cbViewIconType->addItem( QString(), QWBFS::WiiTDB::CoverDisc );
+    cbViewIconType->addItem( QString(), QWBFS::WiiTDB::Cover );
     
-    cbProxyType->addItem( QString::null, QNetworkProxy::NoProxy );
-    cbProxyType->addItem( QString::null, QNetworkProxy::Socks5Proxy );
-    cbProxyType->addItem( QString::null, QNetworkProxy::HttpProxy );
+    cbProxyType->addItem( QString(), QNetworkProxy::NoProxy );
+    cbProxyType->addItem( QString(), QNetworkProxy::Socks5Proxy );
+    cbProxyType->addItem( QString(), QNetworkProxy::HttpProxy );
     
     lCurrentLocale->setText( mProperties->locale().name() );
     cbViewMode->setCurrentIndex( cbViewMode->findData( mProperties->viewMode() ) );

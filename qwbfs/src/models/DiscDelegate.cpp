@@ -98,7 +98,7 @@ QSize DiscDelegate::sizeHint( const QStyleOptionViewItem& option, const QModelIn
     return QStyledItemDelegate::sizeHint( option, index );
 }
 
-void DiscDelegate::paintFrame( QPainter* painter, const QStyleOptionViewItemV4& option, bool pair ) const
+void DiscDelegate::paintFrame( QPainter* painter, const QStyleOptionViewItem& option, bool pair ) const
 {
     const int corner = 5;
     const QRect r = option.rect.adjusted( 0, 0, -1, -1 );
@@ -123,7 +123,7 @@ void DiscDelegate::paintFrame( QPainter* painter, const QStyleOptionViewItemV4& 
     painter->drawRoundedRect( r, corner, corner );
 }
 
-void DiscDelegate::paintList( QPainter* painter, const QStyleOptionViewItemV4& option, const QModelIndex& index ) const
+void DiscDelegate::paintList( QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const
 {
     painter->setRenderHint( QPainter::Antialiasing );
     
@@ -133,7 +133,7 @@ void DiscDelegate::paintList( QPainter* painter, const QStyleOptionViewItemV4& o
     
     // background / selection
     {
-        QStyleOptionViewItemV4 o = option;
+        QStyleOptionViewItem o = option;
         o.rect = option.rect.adjusted( 1, 1, 0, 0 );
         
         paintFrame( painter, o, selected );
@@ -187,7 +187,7 @@ void DiscDelegate::paintList( QPainter* painter, const QStyleOptionViewItemV4& o
     }
 }
 
-void DiscDelegate::paintIcon( QPainter* painter, const QStyleOptionViewItemV4& option, const QModelIndex& index ) const
+void DiscDelegate::paintIcon( QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const
 {
     painter->setRenderHint( QPainter::Antialiasing );
     
@@ -202,7 +202,7 @@ void DiscDelegate::paintIcon( QPainter* painter, const QStyleOptionViewItemV4& o
     
     // selection
     if ( selected ) {
-        QStyleOptionViewItemV4 o = option;
+        QStyleOptionViewItem o = option;
         o.rect = option.rect.adjusted( 1, 1, 0, 0 );
         
         paintFrame( painter, o );
@@ -224,7 +224,7 @@ void DiscDelegate::paintIcon( QPainter* painter, const QStyleOptionViewItemV4& o
     
     // title
     {
-        QStyleOptionViewItemV4 o = option;
+        QStyleOptionViewItem o = option;
         o.displayAlignment = Qt::AlignCenter;
         o.rect = option.rect.adjusted( 1, option.rect.height() -( margin *2 ), 0, 0 );
         o.icon = QIcon();

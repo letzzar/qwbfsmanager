@@ -37,6 +37,7 @@ void bn_inv(u8 *d, u8 *a, u8 *N, u32 n);	// only for prime N
 void bn_exp(u8 *d, u8 *a, u8 *N, u32 n, u8 *e, u32 en);
 
 // crypto
+#ifdef WBFS_WITH_OPENSSL
 void md5(u8 *data, u32 len, u8 *hash);
 void sha(u8 *data, u32 len, u8 *hash);
 void get_key(const char *name, u8 *key, u32 len);
@@ -45,6 +46,7 @@ void aes_cbc_enc(u8 *key, u8 *iv, u8 *in, u32 len, u8 *out);
 void decrypt_title_key(u8 *tik, u8 *title_key);
 int check_cert_chain(u8 *data, u32 data_len, u8 *cert, u32 cert_len);
 int check_ec(u8 *ng, u8 *ap, u8 *sig, u8 *sig_hash);
+#endif
 void generate_ecdsa(u8 *R, u8 *S, u8 *k, u8 *hash);
 int check_ecdsa(u8 *Q, u8 *R, u8 *S, u8 *hash);
 void ec_priv_to_pub(u8 *k, u8 *Q);

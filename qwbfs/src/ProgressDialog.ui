@@ -69,7 +69,7 @@
      <property name="readOnly">
       <bool>true</bool>
      </property>
-     <property name="tabStopWidth">
+     <property name="tabStopDistance">
       <number>40</number>
      </property>
     </widget>

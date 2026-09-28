@@ -62,7 +62,7 @@ PartitionComboBox::PartitionComboBox( QWidget* parent )
     mButton->setToolTip( tr( "Add a partition" ) );
     
     QHBoxLayout* hl = new QHBoxLayout( this );
-    hl->setMargin( 0 );
+    hl->setContentsMargins( 0, 0, 0, 0 );
     hl->setSpacing( 5 );
     hl->addStretch();
     hl->addWidget( mButton );
@@ -101,7 +101,7 @@ void PartitionComboBox::modelChanged()
 
 void PartitionComboBox::addPartition()
 {
-    const QString partition = QInputDialog::getText( this, QString::null, tr( "Enter a partition path" ) );
+    const QString partition = QInputDialog::getText( this, QString(), tr( "Enter a partition path" ) );
     
     if ( !partition.isNull() && findText( partition ) == -1 ) {
         partitionModel()->addPartition( partition );
@@ -146,7 +146,7 @@ void PartitionComboBox::paintEvent( QPaintEvent* event )
     else {
         const QModelIndex index = partitionModel()->QAbstractTableModel::index( currentIndex(), modelColumn(), rootModelIndex() );
         
-        QStyleOptionViewItemV4 o;
+        QStyleOptionViewItem o;
         o.initFrom( this );
         o.widget = this;
         o.rect = option.rect;

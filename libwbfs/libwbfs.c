@@ -636,7 +636,7 @@ u32 wbfs_ren_disc(wbfs_t*p, u8* discid, u8* newname)
 		return 1;
 	
 	memset(d->header->disc_header_copy+0x20, 0, 0x40);
-	strncpy(d->header->disc_header_copy+0x20, (char*)newname, 0x39);
+	strncpy((char*)d->header->disc_header_copy+0x20, (char*)newname, 0x39);
 	d->header->disc_header_copy[0x20+0x39] = '\0'; //force last char to 0
 
 	p->write_hdsector(p->callback_data,

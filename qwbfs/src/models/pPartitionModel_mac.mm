@@ -31,11 +31,14 @@ http://stackoverflow.com/questions/1515068/list-all-drives-partitions-and-get-de
 */
 
 #import <DiskArbitration/DiskArbitration.h>
-#import <CoreServices/CoreServices.h>
+
+#include <sys/param.h>
+#include <sys/mount.h>
 
 #include <FreshCore/pMacHelpers>
 
 #include <QStringList>
+#include <QFile>
 #include <QDebug>
 
 class DADisksSession
@@ -60,6 +63,20 @@ public:
 		CFRelease( mSession );
 	}
 	
+	static int fileSystemId( const QString& kind )
+	{
+		const QString k = kind.toLower();
+		
+		if ( k == "msdos" ) {
+			return 0x0C; // FAT32 (LBA)
+		}
+		else if ( k == "ntfs" || k == "exfat" ) {
+			return 0x07;
+		}
+		
+		return 0xAF; // HFS / HFS+ / APFS and others, as the Carbon API reported
+	}
+	
 	static pPartition createPartition( DADiskRef disk )
 	{
 		const CFDictionaryRef dict = DADiskCopyDescription( disk );
@@ -77,35 +94,22 @@ public:
 				properties[ "DAVolumeKind" ] = pPartition::fileSystemIdToString( 0x25 );
 			}
 			
-			FSVolumeRefNum volume;
 			qint64 total = properties.value( "DAMediaSize", -1 ).toLongLong();
 			qint64 free = -1;
 			
-			// get volume infos, like total bytes, free bytes...
-			if ( FSGetVolumeForDADisk( disk, &volume ) == noErr ) {
-				FSVolumeInfo volumeInfo;
+			// get volume infos (total bytes, free bytes...) of mounted volumes
+			// (FSGetVolumeForDADisk/FSGetVolumeInfo Carbon APIs are deprecated since 10.8)
+			const QString volumePath = properties.value( "DAVolumePath" ).toString();
+			
+			if ( properties[ "DAVolumeKindId" ] != 0x25 && !volumePath.isEmpty() ) {
+				struct statfs stats;
 				
-				bzero( (void*)&volumeInfo, sizeof(volumeInfo));
-				
-				/*qint64 major = properties.value( "DAMediaBSDMajor" ).toLongLong();
-				qint64 minor = properties.value( "DAMediaBSDMinor" ).toLongLong();
-				
-				qWarning() << "-----";
-				QStringList test;
-				test << QString( "%1%2" ).arg( major, 0, 16 ).arg( minor, 0, 16 ).toUpper().prepend( "0x" );
-				test << QString( "%1" ).arg( major +minor, 0, 16 ).toUpper().prepend( "0x" );
-				test << QString( "%1" ).arg( major, 0, 16 ).toUpper().prepend( "0x" );
-				
-				qWarning()
-					<< properties.value( "DAVolumeKind" ).toString().toUpper()
-					<< properties.value( "DAMediaContent" ).toString().toUpper()
-					<< test;*/
-				
-				if ( properties[ "DAVolumeKindId" ] != 0x25 && FSGetVolumeInfo( volume, 0, 0, kFSVolInfoSizes | kFSVolInfoFSInfo, &volumeInfo, 0, 0 ) == noErr ) {
-					properties[ "DAVolumeKindId" ] = volumeInfo.filesystemID == 0 ? 0xAF : volumeInfo.filesystemID;
-					total = volumeInfo.totalBytes;
-					free = volumeInfo.freeBytes;
+				if ( statfs( QFile::encodeName( volumePath ).constData(), &stats ) == 0 ) {
+					total = (qint64)stats.f_blocks *(qint64)stats.f_bsize;
+					free = (qint64)stats.f_bavail *(qint64)stats.f_bsize;
 				}
+				
+				properties[ "DAVolumeKindId" ] = fileSystemId( properties.value( "DAVolumeKind" ).toString() );
 			}
 			
 			partition.setProperties( properties );

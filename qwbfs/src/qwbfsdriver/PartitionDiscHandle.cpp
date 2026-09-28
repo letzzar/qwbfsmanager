@@ -96,7 +96,7 @@ int DiscHandle::index() const
 QString DiscHandle::isoName() const
 {
     if ( !isValid() ) {
-        return QString::null;
+        return QString();
     }
     
     QString isoName = QString::fromLocal8Bit( QString::fromLocal8Bit( (char*)d->handle->header->disc_header_copy +0x20, 0x100 )

@@ -76,7 +76,7 @@ UIMain::UIMain( QWidget* parent )
     mUpdateChecker->setDownloadsFeedUrl( QUrl( APPLICATION_DOWNLOADS_FEED ) );
     mUpdateChecker->setVersion( APPLICATION_VERSION );
     mUpdateChecker->setVersionString( APPLICATION_VERSION_STR );
-    mUpdateChecker->setVersionDiscoveryPattern( ".*qwbfsmanager-([0-9\\.]+).*" );
+    mUpdateChecker->setVersionDiscoveryPattern( ".*?([0-9]+(?:\\.[0-9]+)+).*" );
 
     setWindowTitle( QString( "%1 v%2" ).arg( APPLICATION_NAME ).arg( APPLICATION_VERSION_STR ) );
     setUnifiedTitleAndToolBarOnMac( true );
@@ -87,7 +87,7 @@ UIMain::UIMain( QWidget* parent )
 #endif
 
     centralVerticalLayout->setMenuBar( qmtbInfos );
-    qmtbInfos->layout()->setMargin( 5 );
+    qmtbInfos->layout()->setContentsMargins( 5, 5, 5, 5 );
     qmtbInfos->queuedMessageWidget()->setContentsMargins( 5, 0, 5, 0 );
     qmtbInfos->setVisible( false );
 
@@ -131,7 +131,7 @@ UIMain::UIMain( QWidget* parent )
 
     lvExport->initialize( 0, mCache );
 
-    mLastDiscId = -1;
+    mLastDiscId.clear();
 
     pwMainView->setMainView( true );
     pwMainView->showHideImportViewButton()->setChecked( false );
@@ -278,7 +278,7 @@ void UIMain::loadProperties( bool firstInit )
 
     pTranslationManager* translationManager = pTranslationManager::instance();
     translationManager->setTranslationsPaths( properties.translationsPaths() );
-    translationManager->setCurrentLocale( properties.locale().name() );
+    translationManager->setCurrentLocale( properties.locale() );
 
     if ( !properties.localeAccepted() ) {
         changeLocaleRequested();
@@ -321,7 +321,7 @@ void UIMain::changeLocaleRequested()
         properties.setLocaleAccepted( true );
         properties.setLocale( QLocale( locale ) );
 
-        translationManager->setCurrentLocale( locale );
+        translationManager->setCurrentLocale( QLocale( locale ) );
     }
 }
 
@@ -478,7 +478,7 @@ void UIMain::on_aProperties_triggered()
 
 void UIMain::on_aConvertToWBFSFiles_triggered()
 {
-    const QStringList filePaths = QFileDialog::getOpenFileNames( this, tr( "Choose ISO files to convert" ), QString::null, tr( "ISO Files (*.iso)" ) );
+    const QStringList filePaths = QFileDialog::getOpenFileNames( this, tr( "Choose ISO files to convert" ), QString(), tr( "ISO Files (*.iso)" ) );
 
     if ( filePaths.isEmpty() ) {
         return;
@@ -501,7 +501,7 @@ void UIMain::on_aConvertToWBFSFiles_triggered()
 
 void UIMain::on_aConvertToISOFiles_triggered()
 {
-    const QStringList filePaths = QFileDialog::getOpenFileNames( this, tr( "Choose WBFS files to convert" ), QString::null, tr( "WBFS Files (*.wbfs)" ) );
+    const QStringList filePaths = QFileDialog::getOpenFileNames( this, tr( "Choose WBFS files to convert" ), QString(), tr( "WBFS Files (*.wbfs)" ) );
 
     if ( filePaths.isEmpty() ) {
         return;
@@ -548,7 +548,7 @@ void UIMain::on_aRenameDiscsInFolder_triggered()
         .arg( tr( "%1 = File Suffix" ).arg( "%suffix" ) )
         ;
     bool ok;
-    const QString pattern = QInputDialog::getItem( this, QString::null, text, patterns, 0, true, &ok );
+    const QString pattern = QInputDialog::getItem( this, QString(), text, patterns, 0, true, &ok );
 
     if ( !ok || pattern.isEmpty() ) {
         return;
@@ -603,7 +603,7 @@ void UIMain::on_tbReloadDrives_clicked()
     }
 }
 
-void UIMain::on_cbDrives_currentIndexChanged( const QString& text )
+void UIMain::on_cbDrives_currentTextChanged( const QString& text )
 {
     mFoldersModel->setRootPath( text );
     tvFolders->setRootIndex( mFoldersModel->index( text ) );
@@ -626,7 +626,7 @@ void UIMain::on_tbExport_clicked()
         return;
     }
 
-    const QString path = QFileDialog::getExistingDirectory( this, tr( "Choose a folder to export the discs" ), QString::null );
+    const QString path = QFileDialog::getExistingDirectory( this, tr( "Choose a folder to export the discs" ), QString() );
 
     if ( path.isEmpty() ) {
         return;

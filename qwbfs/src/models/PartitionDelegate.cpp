@@ -86,7 +86,7 @@ PartitionDelegate::~PartitionDelegate()
 
 void PartitionDelegate::paint( QPainter* painter, const QStyleOptionViewItem& _option, const QModelIndex& index ) const
 {
-    QStyleOptionViewItemV4 option = _option;
+    QStyleOptionViewItem option = _option;
     initStyleOption( &option, index );
     option.palette = mStyle->standardPalette();
 #if defined( Q_OS_MAC )
@@ -125,18 +125,18 @@ void PartitionDelegate::paint( QPainter* painter, const QStyleOptionViewItem& _o
     int total = 100;
     int used = ( (qreal)partition.property( pPartition::UsedSize ).toLongLong() /(qreal)partition.property( pPartition::TotalSize ).toLongLong() ) *(qreal)100;
     
-    QStyleOptionProgressBarV2 pbOption;
+    QStyleOptionProgressBar pbOption;
     pbOption.initFrom( option.widget );
     pbOption.state = option.state;
     pbOption.palette = option.palette;
     pbOption.rect = option.rect.adjusted( margin, margin, -margin, -margin );
     pbOption.bottomToTop = false;
     pbOption.invertedAppearance = false;
-    pbOption.orientation = Qt::Horizontal;
+    pbOption.state |= QStyle::State_Horizontal;
     pbOption.maximum = total;
     pbOption.minimum = 0;
     pbOption.progress = used;
-    pbOption.text = QString::null;
+    pbOption.text = QString();
     pbOption.textAlignment = Qt::AlignCenter;
     pbOption.textVisible = false;
     

@@ -41,6 +41,7 @@
 #include "models/Disc.h"
 
 #include <QTime>
+#include <QElapsedTimer>
 
 class ProgressDialog : public QDialog, public Ui::ProgressDialog
 {
@@ -59,7 +60,7 @@ public slots:
 
 protected:
     WorkerThread* mThread;
-    QTime mElapsed;
+    QElapsedTimer mElapsed;
     
     void closeEvent( QCloseEvent* event );
     void localeChanged();

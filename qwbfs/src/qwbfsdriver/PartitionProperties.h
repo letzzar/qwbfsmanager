@@ -43,7 +43,7 @@ namespace Partition {
 
 struct Properties
 {
-    Properties( const QString& partition = QString::null );
+    Properties( const QString& partition = QString() );
     
     bool reset;
     QString partition;

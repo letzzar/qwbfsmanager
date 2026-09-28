@@ -198,10 +198,10 @@ void Properties::setUpdateLastChecked( const QDateTime& dateTime )
 
 QStringList Properties::translationsPaths() const
 {
-    QSet<QString> translationsPaths = mSettings->value( SETTINGS_TRANSLATIONS_PATHS ).toStringList().toSet();
+    QStringList translationsPaths = mSettings->value( SETTINGS_TRANSLATIONS_PATHS ).toStringList();
 
     if ( translationsPaths.isEmpty() ) {
-        translationsPaths << QLibraryInfo::location( QLibraryInfo::TranslationsPath );
+        translationsPaths << QLibraryInfo::path( QLibraryInfo::TranslationsPath );
 
 #if defined( Q_OS_WIN )
         // sources ones
@@ -216,7 +216,7 @@ QStringList Properties::translationsPaths() const
         // sources ones
         translationsPaths << "../Resources/qt/translations";
         translationsPaths << "../Resources/translations";
-        translationsPaths << QCoreApplication::applicationDirPath().append( "/../Resources/qt/ranslations" );
+        translationsPaths << QCoreApplication::applicationDirPath().append( "/../Resources/qt/translations" );
         translationsPaths << QCoreApplication::applicationDirPath().append( "/../Resources/translations" );
         translationsPaths << QCoreApplication::applicationDirPath().append( "/../../../../translations" );
         translationsPaths << QCoreApplication::applicationDirPath().append( "/../../../../fresh/translations" );
@@ -230,12 +230,15 @@ QStringList Properties::translationsPaths() const
         translationsPaths << QCoreApplication::applicationDirPath().append( "/../translations" );
         translationsPaths << QCoreApplication::applicationDirPath().append( "/../fresh/translations" );
         translationsPaths << QCoreApplication::applicationDirPath().append( "/../../../fresh/translations" );
+        // installed ones
+        translationsPaths << QCoreApplication::applicationDirPath().append( "/../share/qwbfsmanager/translations" );
 #endif
     }
 
     //qWarning() << translationsPaths;
 
-    return translationsPaths.toList();
+    translationsPaths.removeDuplicates();
+    return translationsPaths;
 }
 
 void Properties::setTranslationsPaths( const QStringList& translationsPaths )
@@ -333,7 +336,7 @@ void Properties::setCustomPartitions( const QStringList& partitions )
 
 QString Properties::decrypt( const QByteArray& data )
 {
-    return data.isEmpty() ? QString::null : QString::fromUtf8( qUncompress( QByteArray::fromBase64( data ) ) );
+    return data.isEmpty() ? QString() : QString::fromUtf8( qUncompress( QByteArray::fromBase64( data ) ) );
 }
 
 QByteArray Properties::crypt( const QString& string )

@@ -73,7 +73,9 @@ UIAbout::UIAbout( QWidget* parent )
     localeChanged();
 
     QFile file( ":/files/GPL-2" );
-    file.open( QIODevice::ReadOnly );
+    if ( !file.open( QIODevice::ReadOnly ) ) {
+        qWarning( "%s: Can't open license file", Q_FUNC_INFO );
+    }
     pteLicense->setPlainText( QString::fromUtf8( file.readAll() ) );
 }
 

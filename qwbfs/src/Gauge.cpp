@@ -39,7 +39,7 @@
 #include <FreshCore/pCoreUtils>
 
 #include <QStyleFactory>
-#include <QStyleOptionProgressBarV2>
+#include <QStyleOptionProgressBar>
 #include <QPainter>
 #include <QDebug>
 
@@ -128,10 +128,10 @@ void Gauge::paintEvent( QPaintEvent* event )
     const int overflowPercent = max > available ? int( available != 0 ? max /available *cent : 0 ) : 0;
     const int flags = Qt::AlignCenter | Qt::TextWordWrap;
 
-    QStyleOptionProgressBarV2 option;
+    QStyleOptionProgressBar option;
     option.bottomToTop = false;
     option.invertedAppearance = false;
-    option.orientation = Qt::Horizontal;
+    option.state |= QStyle::State_Horizontal;
     option.maximum = totalPercent;
     option.minimum = 0;
     option.progress = 0;
