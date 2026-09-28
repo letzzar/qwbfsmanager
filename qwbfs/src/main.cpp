@@ -34,6 +34,7 @@
 **
 ****************************************************************************/
 #include <QApplication>
+#include <QtPlugin>
 #include <QProxyStyle>
 #include <QSplashScreen>
 #include <QPointer>
@@ -52,6 +53,8 @@
 
 #define SPLASHSCREEN_TIMEOUT 3000
 
+Q_IMPORT_PLUGIN( ThemedSvgIconPlugin )
+
 class IconSizeProxyStyle : public QProxyStyle
 {
     Q_OBJECT
@@ -61,7 +64,7 @@ public:
     virtual int pixelMetric( QStyle::PixelMetric metric, const QStyleOption* option = 0, const QWidget* widget = 0 ) const {
         switch ( metric ) {
             case QStyle::PM_ToolBarIconSize: // 64
-                return 36;
+                return 24;
 
             case QStyle::PM_SmallIconSize: // 32
                 return 16;

@@ -44,7 +44,7 @@ pPathListEditor::pPathListEditor( const QString& title, const QString& path, QWi
 
 void pPathListEditor::init()
 {
-    aEdit->setIcon( pIconManager::icon( QSL( "folder.png" ), QSL( ":/fresh/icons" ) ) );
+    aEdit->setIcon( QIcon( QSL( ":/icons/folder-open.tsvg" ) ) );
 }
 
 void pPathListEditor::onAddItem()

@@ -30,7 +30,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources/resources.qrc">
-         <normaloff>:/icons/256/read-partition.png</normaloff>:/icons/256/read-partition.png</iconset>
+         <normaloff>:/icons/hard-drive.tsvg</normaloff>:/icons/hard-drive.tsvg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -50,7 +50,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources/resources.qrc">
-         <normaloff>:/icons/256/format.png</normaloff>:/icons/256/format.png</iconset>
+         <normaloff>:/icons/eraser.tsvg</normaloff>:/icons/eraser.tsvg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -70,7 +70,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources/resources.qrc">
-         <normaloff>:/icons/256/add.png</normaloff>:/icons/256/add.png</iconset>
+         <normaloff>:/icons/plus.tsvg</normaloff>:/icons/plus.tsvg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -90,7 +90,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources/resources.qrc">
-         <normaloff>:/icons/256/remove.png</normaloff>:/icons/256/remove.png</iconset>
+         <normaloff>:/icons/minus.tsvg</normaloff>:/icons/minus.tsvg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -144,7 +144,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/256/remove.png</normaloff>:/icons/256/remove.png</iconset>
+             <normaloff>:/icons/trash-2.tsvg</normaloff>:/icons/trash-2.tsvg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -164,7 +164,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/256/rename.png</normaloff>:/icons/256/rename.png</iconset>
+             <normaloff>:/icons/pencil.tsvg</normaloff>:/icons/pencil.tsvg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -184,7 +184,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/256/detailed.png</normaloff>:/icons/256/detailed.png</iconset>
+             <normaloff>:/icons/panel-bottom.tsvg</normaloff>:/icons/panel-bottom.tsvg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -320,7 +320,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/256/clear.png</normaloff>:/icons/256/clear.png</iconset>
+             <normaloff>:/icons/list-x.tsvg</normaloff>:/icons/list-x.tsvg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -340,7 +340,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/256/remove.png</normaloff>:/icons/256/remove.png</iconset>
+             <normaloff>:/icons/minus.tsvg</normaloff>:/icons/minus.tsvg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -360,7 +360,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/256/import.png</normaloff>:/icons/256/import.png</iconset>
+             <normaloff>:/icons/hard-drive-download.tsvg</normaloff>:/icons/hard-drive-download.tsvg</iconset>
            </property>
            <property name="iconSize">
             <size>

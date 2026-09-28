@@ -8,6 +8,37 @@
     <file alias="disc.png">wii-disc.png</file>
   </qresource>
   <qresource prefix="/icons">
+    <file alias="arrow-down.tsvg">icons/arrow-down.tsvg</file>
+    <file alias="arrow-up.tsvg">icons/arrow-up.tsvg</file>
+    <file alias="circle-check.tsvg">icons/circle-check.tsvg</file>
+    <file alias="circle-x.tsvg">icons/circle-x.tsvg</file>
+    <file alias="cloud-download.tsvg">icons/cloud-download.tsvg</file>
+    <file alias="eraser.tsvg">icons/eraser.tsvg</file>
+    <file alias="file-input.tsvg">icons/file-input.tsvg</file>
+    <file alias="file-output.tsvg">icons/file-output.tsvg</file>
+    <file alias="file.tsvg">icons/file.tsvg</file>
+    <file alias="folder-open.tsvg">icons/folder-open.tsvg</file>
+    <file alias="folder-pen.tsvg">icons/folder-pen.tsvg</file>
+    <file alias="folder-tree.tsvg">icons/folder-tree.tsvg</file>
+    <file alias="hard-drive-download.tsvg">icons/hard-drive-download.tsvg</file>
+    <file alias="hard-drive-upload.tsvg">icons/hard-drive-upload.tsvg</file>
+    <file alias="hard-drive.tsvg">icons/hard-drive.tsvg</file>
+    <file alias="heart.tsvg">icons/heart.tsvg</file>
+    <file alias="image.tsvg">icons/image.tsvg</file>
+    <file alias="info.tsvg">icons/info.tsvg</file>
+    <file alias="languages.tsvg">icons/languages.tsvg</file>
+    <file alias="list-x.tsvg">icons/list-x.tsvg</file>
+    <file alias="minus.tsvg">icons/minus.tsvg</file>
+    <file alias="panel-bottom.tsvg">icons/panel-bottom.tsvg</file>
+    <file alias="panel-left.tsvg">icons/panel-left.tsvg</file>
+    <file alias="pencil.tsvg">icons/pencil.tsvg</file>
+    <file alias="plus.tsvg">icons/plus.tsvg</file>
+    <file alias="power.tsvg">icons/power.tsvg</file>
+    <file alias="refresh-cw.tsvg">icons/refresh-cw.tsvg</file>
+    <file alias="settings.tsvg">icons/settings.tsvg</file>
+    <file alias="sliders-horizontal.tsvg">icons/sliders-horizontal.tsvg</file>
+    <file alias="trash-2.tsvg">icons/trash-2.tsvg</file>
+    <file alias="wrench.tsvg">icons/wrench.tsvg</file>
     <file>128/iso-to-wbfs.png</file>
     <file>128/wbfs-to-iso.png</file>
     <file>donation.png</file>

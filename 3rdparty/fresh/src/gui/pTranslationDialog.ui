@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../../resources/fresh.qrc">
-    <normaloff>:/fresh/icons/translation.png</normaloff>:/fresh/icons/translation.png</iconset>
+    <normaloff>:/icons/languages.tsvg</normaloff>:/icons/languages.tsvg</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" colspan="3">
@@ -49,7 +49,7 @@ You can click on buttons to locate/reload the translations.</string>
      </property>
      <property name="icon">
       <iconset resource="../../resources/fresh.qrc">
-       <normaloff>:/fresh/icons/folder.png</normaloff>:/fresh/icons/folder.png</iconset>
+       <normaloff>:/icons/folder-open.tsvg</normaloff>:/icons/folder-open.tsvg</iconset>
      </property>
     </widget>
    </item>
@@ -60,7 +60,7 @@ You can click on buttons to locate/reload the translations.</string>
      </property>
      <property name="icon">
       <iconset resource="../../resources/fresh.qrc">
-       <normaloff>:/fresh/icons/update.png</normaloff>:/fresh/icons/update.png</iconset>
+       <normaloff>:/icons/refresh-cw.tsvg</normaloff>:/icons/refresh-cw.tsvg</iconset>
      </property>
     </widget>
    </item>

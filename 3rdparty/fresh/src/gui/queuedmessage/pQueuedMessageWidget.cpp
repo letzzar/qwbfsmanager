@@ -32,6 +32,8 @@
 #include <QStyle>
 #include <QPushButton>
 #include <QPainter>
+#include <QIcon>
+#include <QEvent>
 #include <QDebug>
 
 pQueuedMessage::pQueuedMessage()
@@ -61,9 +63,10 @@ pQueuedMessageWidget::pQueuedMessageWidget( QWidget* parent )
     : QWidget( parent )
 {
     mDefaultTimeout = 0;
-    mDefaultPixmap = pIconManager::pixmap( QSL( "info.png" ), QSL( ":/fresh/icons" ) );
-    mDefaultBackground = QBrush( QColor( 250, 230, 147 ) );
-    mDefaultForeground = QBrush( QColor( 0, 0, 0 ) );
+    mDefaultPixmap = QIcon( QSL( ":/icons/info.tsvg" ) ).pixmap( QSize( 20, 20 ), devicePixelRatioF() );
+    // No brush: follow the palette (accent tinted background, see currentMessageBackground())
+    mDefaultBackground = QBrush( Qt::NoBrush );
+    mDefaultForeground = QBrush( Qt::NoBrush );
 
     // pixmap
     lPixmap = new QLabel( this );
@@ -238,13 +241,43 @@ QPixmap pQueuedMessageWidget::currentMessagePixmap() const
 QBrush pQueuedMessageWidget::currentMessageBackground() const
 {
     const pQueuedMessage msg = currentMessage();
-    return msg.background == QBrush( Qt::NoBrush ) ? mDefaultBackground : msg.background;
+    const QBrush brush = msg.background == QBrush( Qt::NoBrush ) ? mDefaultBackground : msg.background;
+
+    if ( brush.style() == Qt::NoBrush ) {
+        // blend the accent color over the window background
+        const QColor accent = palette().color( QPalette::Highlight );
+        const QColor window = palette().color( QPalette::Window );
+        const qreal ratio = 0.18;
+        return QColor::fromRgbF(
+            window.redF() *( 1 -ratio ) +accent.redF() *ratio,
+            window.greenF() *( 1 -ratio ) +accent.greenF() *ratio,
+            window.blueF() *( 1 -ratio ) +accent.blueF() *ratio
+        );
+    }
+
+    return brush;
 }
 
 QBrush pQueuedMessageWidget::currentMessageForeground() const
 {
     const pQueuedMessage msg = currentMessage();
-    return msg.foreground == QBrush( Qt::NoBrush ) ? mDefaultForeground : msg.foreground;
+    const QBrush brush = msg.foreground == QBrush( Qt::NoBrush ) ? mDefaultForeground : msg.foreground;
+    return brush.style() == Qt::NoBrush ? palette().brush( QPalette::WindowText ) : brush;
+}
+
+void pQueuedMessageWidget::changeEvent( QEvent* event )
+{
+    QWidget::changeEvent( event );
+
+    if ( event->type() == QEvent::PaletteChange && pendingMessageCount() > 0 ) {
+        // light/dark theme switch: refresh the message colors and icon
+        mDefaultPixmap = QIcon( QSL( ":/icons/info.tsvg" ) ).pixmap( QSize( 20, 20 ), devicePixelRatioF() );
+        QPalette pal = lMessage->palette();
+        pal.setBrush( lMessage->foregroundRole(), currentMessageForeground() );
+        lMessage->setPalette( pal );
+        lPixmap->setPixmap( currentMessagePixmap() );
+        update();
+    }
 }
 
 void pQueuedMessageWidget::paintEvent( QPaintEvent* event )
@@ -255,9 +288,10 @@ void pQueuedMessageWidget::paintEvent( QPaintEvent* event )
     }
 
     QPainter painter( this );
+    painter.setRenderHint( QPainter::Antialiasing );
     painter.setPen( Qt::NoPen );
     painter.setBrush( currentMessageBackground() );
-    painter.drawRect( contentsRect() );
+    painter.drawRoundedRect( contentsRect(), 8, 8 );
 }
 
 void pQueuedMessageWidget::buttonClicked( QAbstractButton* button )

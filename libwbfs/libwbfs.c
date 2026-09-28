@@ -7,8 +7,14 @@
 #include <errno.h>
 
 #ifndef WIN32
+#if defined(_MSC_VER)
+#define likely(x)       (x)
+#define unlikely(x)     (x)
+#define __attribute(x)
+#else
 #define likely(x)       __builtin_expect(!!(x), 1)
 #define unlikely(x)     __builtin_expect(!!(x), 0)
+#endif
 #else
 #define likely(x)		(x)
 #define unlikely(x)		(x)

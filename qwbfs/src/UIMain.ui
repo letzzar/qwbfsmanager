@@ -12,8 +12,8 @@
   </property>
   <property name="iconSize">
    <size>
-    <width>36</width>
-    <height>36</height>
+    <width>24</width>
+    <height>24</height>
    </size>
   </property>
   <property name="toolButtonStyle">
@@ -63,7 +63,7 @@
        <widget class="QWidget" name="wFS">
         <attribute name="icon">
          <iconset resource="../resources/resources.qrc">
-          <normaloff>:/icons/256/tree.png</normaloff>:/icons/256/tree.png</iconset>
+          <normaloff>:/icons/folder-tree.tsvg</normaloff>:/icons/folder-tree.tsvg</iconset>
         </attribute>
         <attribute name="title">
          <string>File System</string>
@@ -79,7 +79,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/256/reload.png</normaloff>:/icons/256/reload.png</iconset>
+             <normaloff>:/icons/refresh-cw.tsvg</normaloff>:/icons/refresh-cw.tsvg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -132,7 +132,7 @@
        <widget class="QWidget" name="wExport">
         <attribute name="icon">
          <iconset resource="../resources/resources.qrc">
-          <normaloff>:/icons/256/export.png</normaloff>:/icons/256/export.png</iconset>
+          <normaloff>:/icons/hard-drive-upload.tsvg</normaloff>:/icons/hard-drive-upload.tsvg</iconset>
         </attribute>
         <attribute name="title">
          <string>Export</string>
@@ -160,7 +160,7 @@
              </property>
              <property name="icon">
               <iconset resource="../resources/resources.qrc">
-               <normaloff>:/icons/256/clear.png</normaloff>:/icons/256/clear.png</iconset>
+               <normaloff>:/icons/list-x.tsvg</normaloff>:/icons/list-x.tsvg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -180,7 +180,7 @@
              </property>
              <property name="icon">
               <iconset resource="../resources/resources.qrc">
-               <normaloff>:/icons/256/remove.png</normaloff>:/icons/256/remove.png</iconset>
+               <normaloff>:/icons/minus.tsvg</normaloff>:/icons/minus.tsvg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -200,7 +200,7 @@
              </property>
              <property name="icon">
               <iconset resource="../resources/resources.qrc">
-               <normaloff>:/icons/256/export.png</normaloff>:/icons/256/export.png</iconset>
+               <normaloff>:/icons/hard-drive-upload.tsvg</normaloff>:/icons/hard-drive-upload.tsvg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -379,7 +379,7 @@
   <action name="aReloadPartitions">
    <property name="icon">
     <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/256/reload.png</normaloff>:/icons/256/reload.png</iconset>
+     <normaloff>:/icons/refresh-cw.tsvg</normaloff>:/icons/refresh-cw.tsvg</iconset>
    </property>
    <property name="text">
     <string>Reload</string>
@@ -391,7 +391,7 @@
   <action name="aAbout">
    <property name="icon">
     <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/256/about.png</normaloff>:/icons/256/about.png</iconset>
+     <normaloff>:/icons/info.tsvg</normaloff>:/icons/info.tsvg</iconset>
    </property>
    <property name="text">
     <string>About...</string>
@@ -403,7 +403,7 @@
   <action name="aQuit">
    <property name="icon">
     <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/256/quit.png</normaloff>:/icons/256/quit.png</iconset>
+     <normaloff>:/icons/power.tsvg</normaloff>:/icons/power.tsvg</iconset>
    </property>
    <property name="text">
     <string>Quit...</string>
@@ -415,7 +415,7 @@
   <action name="aProperties">
    <property name="icon">
     <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/256/properties.png</normaloff>:/icons/256/properties.png</iconset>
+     <normaloff>:/icons/settings.tsvg</normaloff>:/icons/settings.tsvg</iconset>
    </property>
    <property name="text">
     <string>Properties</string>
@@ -427,7 +427,7 @@
   <action name="aConvertToWBFSFiles">
    <property name="icon">
     <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/128/iso-to-wbfs.png</normaloff>:/icons/128/iso-to-wbfs.png</iconset>
+     <normaloff>:/icons/file-input.tsvg</normaloff>:/icons/file-input.tsvg</iconset>
    </property>
    <property name="text">
     <string>Convert ISO Files</string>
@@ -436,7 +436,7 @@
   <action name="aConvertToISOFiles">
    <property name="icon">
     <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/128/wbfs-to-iso.png</normaloff>:/icons/128/wbfs-to-iso.png</iconset>
+     <normaloff>:/icons/file-output.tsvg</normaloff>:/icons/file-output.tsvg</iconset>
    </property>
    <property name="text">
     <string>Convert WBFS Files</string>
@@ -445,7 +445,7 @@
   <action name="aRenameDiscsInFolder">
    <property name="icon">
     <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/256/read-partition.png</normaloff>:/icons/256/read-partition.png</iconset>
+     <normaloff>:/icons/folder-pen.tsvg</normaloff>:/icons/folder-pen.tsvg</iconset>
    </property>
    <property name="text">
     <string>Rename Discs in folder</string>

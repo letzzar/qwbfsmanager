@@ -80,12 +80,12 @@ void pStringListEditor::init()
     tbActions->setIconSize( QSize( 16, 16 ) );
 
     // create actions
-    aAdd = new QAction( pIconManager::icon( QSL( "add.png" ), QSL( ":/fresh/icons" ) ), tr( "Add Item" ), tbActions );
-    aEdit = new QAction( pIconManager::icon( QSL( "edit.png" ), QSL( ":/fresh/icons" ) ), tr( "Edit Item" ), tbActions );
-    aRemove = new QAction( pIconManager::icon( QSL( "remove.png" ), QSL( ":/fresh/icons" ) ), tr( "Remove Item" ), tbActions );
-    aClear = new QAction( pIconManager::icon( QSL( "clear.png" ), QSL( ":/fresh/icons" ) ), tr( "Clear Items" ), tbActions );
-    aUp = new QAction( pIconManager::icon( QSL( "up.png" ), QSL( ":/fresh/icons" ) ), tr( "Move Item Up" ), tbActions );
-    aDown = new QAction( pIconManager::icon( QSL( "down.png" ), QSL( ":/fresh/icons" ) ), tr( "Move Item Down" ), tbActions );
+    aAdd = new QAction( QIcon( QSL( ":/icons/plus.tsvg" ) ), tr( "Add Item" ), tbActions );
+    aEdit = new QAction( QIcon( QSL( ":/icons/pencil.tsvg" ) ), tr( "Edit Item" ), tbActions );
+    aRemove = new QAction( QIcon( QSL( ":/icons/minus.tsvg" ) ), tr( "Remove Item" ), tbActions );
+    aClear = new QAction( QIcon( QSL( ":/icons/list-x.tsvg" ) ), tr( "Clear Items" ), tbActions );
+    aUp = new QAction( QIcon( QSL( ":/icons/arrow-up.tsvg" ) ), tr( "Move Item Up" ), tbActions );
+    aDown = new QAction( QIcon( QSL( ":/icons/arrow-down.tsvg" ) ), tr( "Move Item Down" ), tbActions );
 
     // add actions to toolbar
     tbActions->addAction( aAdd );

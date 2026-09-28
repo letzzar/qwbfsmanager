@@ -44,6 +44,7 @@
 #include "models/pPartitionModel.h"
 
 #include <QLineEdit>
+#include <QToolButton>
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QMimeData>
@@ -57,6 +58,11 @@ PartitionWidget::PartitionWidget( QWidget* parent )
     const Properties properties( this );
 
     setupUi( this );
+
+    // flat, modern tool buttons
+    foreach ( QToolButton* button, findChildren<QToolButton*>() ) {
+        button->setAutoRaise( true );
+    }
     setAcceptDrops( true );
 
     mDriver = new QWBFS::Driver( this );

@@ -14,7 +14,7 @@ jobs:
   linux:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - name: Install dependencies
@@ -30,7 +30,7 @@ jobs:
           DESTDIR="$PWD/stage" cmake --install build
           mkdir -p dist
           tar -C stage -czf dist/QWBFSManager-linux-x86_64.tar.gz .
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: QWBFSManager-linux
           path: dist/*
@@ -38,7 +38,7 @@ jobs:
   windows:
     runs-on: windows-2022
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: jurplel/install-qt-action@v4
@@ -58,7 +58,7 @@ jobs:
           windeployqt --release --no-compiler-runtime --no-opengl-sw --no-system-d3d-compiler stage/qwbfsmanager.exe
           New-Item -ItemType Directory -Force dist | Out-Null
           Compress-Archive -Path stage/* -DestinationPath dist/QWBFSManager-windows-x64.zip
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: QWBFSManager-windows
           path: dist/*
@@ -66,7 +66,7 @@ jobs:
   macos:
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: jurplel/install-qt-action@v4
@@ -80,7 +80,7 @@ jobs:
           ARCHS: "arm64;x86_64"
           MACOS_MIN: "12.0"
         run: QT_DIR="$QT_ROOT_DIR" packages/macos/make-dmg.sh build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: QWBFSManager-macos
           path: dist/*.dmg
@@ -92,7 +92,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           path: dist
           merge-multiple: true

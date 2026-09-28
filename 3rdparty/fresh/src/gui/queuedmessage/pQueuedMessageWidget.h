@@ -205,6 +205,7 @@ protected:
     /*!
         Reimplemented.
     */
+    void changeEvent( QEvent* event );
     void paintEvent( QPaintEvent* event );
 
 protected slots:

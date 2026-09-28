@@ -38,7 +38,7 @@ pUpdateChecker::pUpdateChecker( QWidget* parent )
     mParent = parent;
 
     mAction = new QAction( this );
-    mAction->setIcon( pIconManager::pixmap( QSL( "gc-update-checker.png" ), QSL( ":/fresh/icons" ) ) );
+    mAction->setIcon( QIcon( QSL( ":/icons/cloud-download.tsvg" ) ) );
 
     localeChanged();
 

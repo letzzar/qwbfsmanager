@@ -44,7 +44,7 @@ pFileListEditor::pFileListEditor( const QString& title, const QString& path, con
 
 void pFileListEditor::init()
 {
-    aEdit->setIcon( pIconManager::icon( QSL( "file.png" ), QSL( ":/fresh/icons" ) ) );
+    aEdit->setIcon( QIcon( QSL( ":/icons/file.tsvg" ) ) );
 }
 
 QString pFileListEditor::path() const

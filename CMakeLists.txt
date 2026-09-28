@@ -19,7 +19,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Widgets Network Xml LinguistTools)
+find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Widgets Network Xml Svg LinguistTools)
 qt_standard_project_setup()
 set(CMAKE_AUTORCC ON)
 

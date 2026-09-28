@@ -51,6 +51,7 @@
 #include "models/pPartitionModel.h" // will be part of fresh library in a next version
 
 #include <QMenuBar>
+#include <QToolButton>
 #include <QMenu>
 #include <QFileSystemModel>
 #include <QFileDialog>
@@ -82,6 +83,11 @@ UIMain::UIMain( QWidget* parent )
     setUnifiedTitleAndToolBarOnMac( true );
     setupUi( this );
 
+    // flat, modern tool buttons
+    foreach ( QToolButton* button, findChildren<QToolButton*>() ) {
+        button->setAutoRaise( true );
+    }
+
 #if defined( Q_OS_MAC )
     mMenuBar->addMenu( "Fake" )->addAction( aProperties );
 #endif
@@ -91,8 +97,8 @@ UIMain::UIMain( QWidget* parent )
     qmtbInfos->queuedMessageWidget()->setContentsMargins( 5, 0, 5, 0 );
     qmtbInfos->setVisible( false );
 
-    dwTools->toggleViewAction()->setIcon( QIcon( ":/icons/256/tools.png" ) );
-    dwCovers->toggleViewAction()->setIcon( QIcon( ":/icons/256/covers.png" ) );
+    dwTools->toggleViewAction()->setIcon( QIcon( ":/icons/panel-left.tsvg" ) );
+    dwCovers->toggleViewAction()->setIcon( QIcon( ":/icons/image.tsvg" ) );
 
     mDonationWidget = new pPaypalButton( this );
     mDonationWidget->setBusinessId( "5R924WYXJ6BAW" );
@@ -213,9 +219,11 @@ bool UIMain::eventFilter( QObject* object, QEvent* event )
                 qmtbInfos->queuedMessageWidget()->currentMessageInformations( 0, &brush, 0 );
 
                 painter.setRenderHint( QPainter::Antialiasing );
-                painter.setPen( QPen( brush.color().darker( 150 ), 0.5 ) );
+                QColor border = qmtbInfos->palette().color( QPalette::Highlight );
+                border.setAlpha( 90 );
+                painter.setPen( QPen( border, 1 ) );
                 painter.setBrush( brush );
-                painter.drawRoundedRect( qmtbInfos->rect().adjusted( 10 -4, -9, -10 +4, -1 ), 9, 9 );
+                painter.drawRoundedRect( QRectF( qmtbInfos->rect() ).adjusted( 6.5, 4.5, -6.5, -2.5 ), 10, 10 );
 
                 return true;
             }

@@ -64,7 +64,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources/resources.qrc">
-             <normaloff>:/icons/256/folder.png</normaloff>:/icons/256/folder.png</iconset>
+             <normaloff>:/icons/languages.tsvg</normaloff>:/icons/languages.tsvg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -160,7 +160,7 @@
             </property>
             <property name="icon">
              <iconset resource="../resources/resources.qrc">
-              <normaloff>:/icons/256/folder.png</normaloff>:/icons/256/folder.png</iconset>
+              <normaloff>:/icons/folder-open.tsvg</normaloff>:/icons/folder-open.tsvg</iconset>
             </property>
             <property name="iconSize">
              <size>

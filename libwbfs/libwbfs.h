@@ -26,8 +26,8 @@ typedef struct wbfs_head
         u8  padding3[2];
         u8  disc_table[0];	// size depends on hd sector size
 }
-#ifndef WIN32
-__attribute((packed)) wbfs_head_t;
+#if defined(_MSC_VER)
+wbfs_head_t; // packed by #pragma pack(1)
 #else
 __attribute((packed)) wbfs_head_t;
 #endif

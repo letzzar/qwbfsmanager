@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../../../resources/fresh.qrc">
-    <normaloff>:/fresh/icons/gc-update-checker.png</normaloff>:/fresh/icons/gc-update-checker.png</iconset>
+    <normaloff>:/icons/cloud-download.tsvg</normaloff>:/icons/cloud-download.tsvg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

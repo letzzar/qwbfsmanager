@@ -58,7 +58,7 @@ PartitionComboBox::PartitionComboBox( QWidget* parent )
 {
     mButton = new QToolButton( this );
     mButton->setAutoRaise( true );
-    mButton->setIcon( QIcon( ":/icons/256/properties.png" ) );
+    mButton->setIcon( QIcon( ":/icons/sliders-horizontal.tsvg" ) );
     mButton->setToolTip( tr( "Add a partition" ) );
     
     QHBoxLayout* hl = new QHBoxLayout( this );

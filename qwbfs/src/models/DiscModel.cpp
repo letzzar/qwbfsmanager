@@ -43,6 +43,7 @@
 #include <QUrl>
 #include <QFileInfo>
 #include <QPixmapCache>
+#include <QIcon>
 #include <QDebug>
 
 #define URLS_FORMAT "text/uri-list"
@@ -505,18 +506,9 @@ QPixmap DiscModel::coverPixmap( const QString& id, const QSize& size, bool cover
 
 QPixmap DiscModel::statePixmap( int state, const QSize& size ) const
 {
-    const QString url = state == QWBFS::Driver::Success ? ":/icons/256/success.png" : ":/icons/256/error.png";
-    const QString key = QString( "%1-%2-%3" ).arg( url ).arg( size.width() ).arg( size.height() );
-    QPixmap pixmap;
-    
-    if ( !QPixmapCache::find( key, &pixmap ) ) {
-        if ( pixmap.load( url ) ) {
-            pixmap = pixmap.scaled( size, Qt::KeepAspectRatio, Qt::SmoothTransformation );
-            QPixmapCache::insert( key, pixmap );
-        }
-    }
-    
-    return pixmap;
+    const QString url = state == QWBFS::Driver::Success ? ":/icons/circle-check.tsvg" : ":/icons/circle-x.tsvg";
+    const qreal scale = mListView ? mListView->devicePixelRatioF() : 1.0;
+    return QIcon( url ).pixmap( size, scale );
 }
 
 ListView* DiscModel::view() const
